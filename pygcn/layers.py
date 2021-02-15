@@ -21,6 +21,7 @@ class GraphConvolution(Module):
         else:
             self.register_parameter('bias', None)
         self.reset_parameters()
+        self.mask = []
 
     def reset_parameters(self):
         stdv = 1. / math.sqrt(self.weight.size(1))
@@ -35,7 +36,28 @@ class GraphConvolution(Module):
             return output + self.bias
         else:
             return output
-
+        inputs_new = []
+        for i in range(len(self.add_all)):
+            aa = torch.gather(input, [i])
+            aa_tile = torch.tile(aa, [len(self.add_all[i]), 1) #expand central
+            bb_nei = torch.gather(x,self.add_all[i])
+            cen_nei = torch.cat([aa_tile, bb_nei],1)
+                                      
+            mask0 = dot(cen_nei, self.W, sparse = self.sparse_inputs)
+            mask0 = nn.Sigmoid(mask0)
+            mask = nn.Dropout(mask0, 1-self.dropout)
+                                      
+            self.mask.append(mask)
+                                      
+            new_cen_nei = aa + torch.sum(mask * bb_nei, 0, keepdims=True)
+            x_new.append(new_cen_nei)
+                                      
+        x_new = torch.squeeze(x_new)
+        pre_sup = dot(x_new, self.W, sparse=self.sparse_inputs)
+                                      
+        return self.act(pre_sup)                               
+                                      
+                                      
     def __repr__(self):
         return self.__class__.__name__ + ' (' \
                + str(self.in_features) + ' -> ' \
