@@ -36,11 +36,11 @@ class GraphConvolution(Module):
             return output + self.bias
         else:
             return output
-        inputs_new = []
+        input_new = []
         for i in range(len(self.add_all)):
             aa = torch.gather(input, [i])
             aa_tile = torch.tile(aa, [len(self.add_all[i]), 1) #expand central
-            bb_nei = torch.gather(x,self.add_all[i])
+            bb_nei = torch.gather(input,self.add_all[i])
             cen_nei = torch.cat([aa_tile, bb_nei],1)
                                       
             mask0 = dot(cen_nei, self.W, sparse = self.sparse_inputs)
@@ -52,8 +52,8 @@ class GraphConvolution(Module):
             new_cen_nei = aa + torch.sum(mask * bb_nei, 0, keepdims=True)
             x_new.append(new_cen_nei)
                                       
-        x_new = torch.squeeze(x_new)
-        pre_sup = dot(x_new, self.W, sparse=self.sparse_inputs)
+        input_new = torch.squeeze(input_new)
+        pre_sup = dot(input_new, self.W, sparse=self.sparse_inputs)
                                       
         return self.act(pre_sup)                               
                                       
