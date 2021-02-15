@@ -12,7 +12,7 @@ def encode_onehot(labels):
     return labels_onehot
 
 
-def load_data(path="../data/cora/", dataset="cora"):
+def load_data(path="../data/cora/", dataset="cora", attack_dimension, train_percente):
     """Load citation network dataset (cora only for now)"""
     print('Loading {} dataset...'.format(dataset))
 
@@ -37,11 +37,19 @@ def load_data(path="../data/cora/", dataset="cora"):
 
     features = normalize(features)
     adj = normalize(adj + sp.eye(adj.shape[0]))
-
+    
+    print('===choose the training data as propotio===', train_percente)
+    train_number = int(train_percente * labels.shape[0])
+    idx_train = range(train_number)
+    idx_val = range(train_number, train_number+500)
+    idx_test = 
+    
+    """
     idx_train = range(140)
     idx_val = range(200, 500)
     idx_test = range(500, 1500)
-
+    """
+    
     features = torch.FloatTensor(np.array(features.todense()))
     labels = torch.LongTensor(np.where(labels)[1])
     adj = sparse_mx_to_torch_sparse_tensor(adj)
@@ -49,8 +57,24 @@ def load_data(path="../data/cora/", dataset="cora"):
     idx_train = torch.LongTensor(idx_train)
     idx_val = torch.LongTensor(idx_val)
     idx_test = torch.LongTensor(idx_test)
+    
+    add_all = []
+    for i in range(adj.shape[0]):
+        add_all.append(adj[i].nonzero()[1])
 
-    return adj, features, labels, idx_train, idx_val, idx_test
+    if attack_dimension > 0:     
+        print('====the attacked dimention====', attack_dimension)  
+
+    # attack node featues (the random  dimension)
+        at_d = attack_dimension 
+        for i in range(features.shape[0]):
+
+            at_idx = np.random.choice(features.shape[1], size=at_d, replace=False)
+            idex_fea = features[i, at_idx].toarray()
+            at_fea = np.where ( idex_fea==0,1,0 )
+            features[i,at_idx] = at_fea
+
+    return add_all, adj, features, labels, idx_train, idx_val, idx_test
 
 
 def normalize(mx):
