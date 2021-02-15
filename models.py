@@ -1,6 +1,6 @@
 import torch.nn as nn
 import torch.nn.functional as F
-from pygcn.layers import *
+from layers import *
 
 
 class GCN_MASK(nn.Module):
