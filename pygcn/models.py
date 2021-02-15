@@ -1,15 +1,19 @@
 import torch.nn as nn
 import torch.nn.functional as F
-from pygcn.layers import GraphConvolution
+from pygcn.layers import *
 
 
-class GCN(nn.Module):
+class GCN_MASK(nn.Module):
     def __init__(self, nfeat, nhid, nclass, dropout):
         super(GCN, self).__init__()
+        self.add_all = add_all
 
-        self.gc1 = GraphConvolution(nfeat, nhid)
-        self.gc2 = GraphConvolution(nhid, nclass)
+        self.gc1 = GraphConvolution(add_all = self.add_all,nfeat, nhid)
+        self.gc2 = gcnmask(nhid, nclass)
         self.dropout = dropout
+        
+    def _mask(self):
+        return self.mask        
 
     def forward(self, x, adj):
         x = F.relu(self.gc1(x, adj))
