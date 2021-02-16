@@ -1,5 +1,7 @@
 # Learnable Aggregator for Graph Convolutional Networks in PyTorch
 
+<p align="center"><img width="40%" src="./imgs/pytorch.png"></p>
+
 [![report](https://img.shields.io/badge/paper-report-red)](https://dl.acm.org/doi/abs/10.1145/3340531.3411983)  [![report](https://img.shields.io/badge/TensorFlow-Implementation-ff69b4)](https://github.com/asarigun/LA-GCN)  [![License](https://img.shields.io/github/license/thudm/cogdl)](https://github.com/asarigun/la-gcn-torch/blob/main/LICENSE) 
 
 PyTorch implementation of of Learnable Aggregators for Graph Convolutional Networks.
