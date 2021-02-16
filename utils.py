@@ -37,7 +37,7 @@ def load_data(path="../data/cora/", dataset="cora", attack_dimension, train_perc
 
     features = normalize(features)
     adj = normalize(adj + sp.eye(adj.shape[0]))
-    
+    """
     print('===choose the training data as propotio===', train_percente)
     train_number = int(train_percente * labels.shape[0])
     idx_train = range(train_number)
@@ -48,7 +48,7 @@ def load_data(path="../data/cora/", dataset="cora", attack_dimension, train_perc
     idx_train = range(140)
     idx_val = range(200, 500)
     idx_test = range(500, 1500)
-    """
+    
     
     features = torch.FloatTensor(np.array(features.todense()))
     labels = torch.LongTensor(np.where(labels)[1])
