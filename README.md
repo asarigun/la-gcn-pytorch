@@ -9,6 +9,7 @@
 PyTorch implementation of of Learnable Aggregators for Graph Convolutional Networks.
 
 ![LA-GCN with Mask Aggregator](https://github.com/asarigun/LA-GCN/blob/main/model.jpg)
+<p align="center"><img width="40%" src="https://github.com/asarigun/LA-GCN/blob/main/model.jpg"></p>
 
 Learnable Aggregator for GCN (LA-GCN) by introducing a shared auxiliary model that provides a
 customized schema in neighborhood aggregation. Under this framework, a new model proposed called
