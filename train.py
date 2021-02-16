@@ -22,6 +22,13 @@ parser.add_argument('--lr', type=float, default=0.01, help='Initial learning rat
 parser.add_argument('--weight_decay', type=float, default=5e-4, help='Weight decay (L2 loss on parameters).')
 parser.add_argument('--hidden', type=int, default=16, help='Number of hidden units.')
 parser.add_argument('--dropout', type=float, default=0.5, help='Dropout rate (1 - keep probability).')
+parser.add_argument('--early_stopping',type=int, default=10, help='Tolerance for early stopping (# of epochs).')
+parser.add_argument('--max_degree', type=int, default=3, help='Maximum Chebyshev polynomial degree.')
+parser.add_argument('--train_percentage', type=float, default=0.1 , help='define the percentage of training data.')
+parser.add_argument('--start_test', type=int, default=80, help='define from which epoch test')
+parser.add_argument('--train_jump', type=int, default=0, help='define whether train jump, defaul train_jump=0')
+parser.add_argument('--attack_dimension', type=int, default=0, help='define how many dimension of the node feature to attack')
+
 
 args = parser.parse_args()
 args.cuda = not args.no_cuda and torch.cuda.is_available()
@@ -32,10 +39,10 @@ if args.cuda:
     torch.cuda.manual_seed(args.seed)
 
 # Load data
-adj, features, labels, idx_train, idx_val, idx_test = load_data()
+add_all, adj, features, labels, idx_train, idx_val, idx_test = load_data()
 
 # Model and optimizer
-model = GCN(nfeat=features.shape[1],
+model = GCN_MASK(add_all, nfeat=features.shape[1],
             nhid=args.hidden,
             nclass=labels.max().item() + 1,
             dropout=args.dropout)
@@ -51,6 +58,18 @@ if args.cuda:
     idx_val = idx_val.cuda()
     idx_test = idx_test.cuda()
 
+"""
+train_loss = []
+train_accuracy = []
+val_loss = []
+val_accuracy = []    
+
+train_gcnmask_gather = []
+test_gcnmask_gather = []
+val_gcnmask_gather = []
+
+best_test_result = 0
+"""
 
 def train(epoch):
     t = time.time()
