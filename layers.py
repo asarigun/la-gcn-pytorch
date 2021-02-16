@@ -47,7 +47,7 @@ class gcnmask(Module):
     """
 
     def __init__(self, in_features, out_features, bias=True):
-        super(GraphConvolution, self).__init__()
+        super(gcnmask, self).__init__()
         self.in_features = in_features
         self.out_features = out_features
         self.add_all = add_all
