@@ -4,7 +4,7 @@
 <p align="center"><img width="40%" src="https://github.com/asarigun/la-gcn-torch/blob/main/pytorch.png"></p>
 
 
-[![report](https://img.shields.io/badge/paper-report-red)](https://dl.acm.org/doi/abs/10.1145/3340531.3411983)  [![report](https://img.shields.io/badge/TensorFlow-Implementation-ff69b4)](https://github.com/asarigun/LA-GCN)  [![License](https://img.shields.io/github/license/thudm/cogdl)](https://github.com/asarigun/la-gcn-torch/blob/main/LICENSE) 
+[![report](https://img.shields.io/badge/paper-report-red)](https://dl.acm.org/doi/abs/10.1145/3340531.3411983)  [![report](https://img.shields.io/badge/Poster-NeurIPS2019-brown)](https://grlearning.github.io/papers/134.pdf)  [![report](https://img.shields.io/badge/TensorFlow-Implementation-ff69b4)](https://github.com/asarigun/LA-GCN)  [![License](https://img.shields.io/github/license/thudm/cogdl)](https://github.com/asarigun/la-gcn-torch/blob/main/LICENSE) 
 
 PyTorch implementation of of Learnable Aggregators for Graph Convolutional Networks.
 
@@ -38,25 +38,8 @@ For official implementation  https://github.com/LiZhang-github/LA-GCN/tree/maste
 python train.py
 ```
 
-## Cite
+## Reference
 
-Thanks for their original TensorFlow-PyTorch implementation of GCN and LA-GCN:
+[1] [Zhang & Lu, A Feature-Importance-Aware and Robust Aggregator for GCN, CIKM 2020](https://dl.acm.org/doi/abs/10.1145/3340531.3411983)  [![report](https://img.shields.io/badge/Official-Code-yellow)](https://github.com/LiZhang-github/LA-GCN/tree/master/code)
 
-
-```
-@inproceedings{
-  title={A Feature-Importance-Aware and Robust Aggregator for GCN},
-  author={Zhang, Li. and Lu, Haiping},
-  booktitle={Conference on Information and Knowledge Management (CIKM)},
-  year={2020}
-}
-```
-
-```
-@article{kipf2016semi,
-  title={Semi-Supervised Classification with Graph Convolutional Networks},
-  author={Kipf, Thomas N and Welling, Max},
-  journal={arXiv preprint arXiv:1609.02907},
-  year={2016}
-}
-```
+[2] [Kipf & Welling, Semi-Supervised Classification with Graph Convolutional Networks, 2016](https://arxiv.org/abs/1609.02907)  [![report](https://img.shields.io/badge/Official-Code-ff69b4)](https://github.com/tkipf/gcn)
