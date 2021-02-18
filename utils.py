@@ -12,9 +12,7 @@ def encode_onehot(labels):
     return labels_onehot
 
 
-def load_data(path, dataset):
-    path = "/data/cora/"
-    dataset="cora"
+def load_data(path="../data/cora/", dataset="cora"):
     """Load citation network dataset (cora only for now)"""
     print('Loading {} dataset...'.format(dataset))
 
@@ -63,10 +61,10 @@ def load_data(path, dataset):
     add_all = []
     for i in range(adj.shape[0]):
         add_all.append(adj[i].nonzero()[1])
-
+    """
     if attack_dimension > 0:     
         print('====the attacked dimention====', attack_dimension)  
-
+    
     # attack node featues (the random  dimension)
         at_d = attack_dimension 
         for i in range(features.shape[0]):
@@ -75,7 +73,7 @@ def load_data(path, dataset):
             idex_fea = features[i, at_idx].toarray()
             at_fea = np.where ( idex_fea==0,1,0 )
             features[i,at_idx] = at_fea
-
+    """
     return add_all, adj, features, labels, idx_train, idx_val, idx_test
 
 
