@@ -86,8 +86,8 @@ def train(epoch):
     if not args.fastmode:
         # Evaluate validation set performance separately,
         # deactivates dropout during validation run.
-    model.eval()
-    output = model(features, adj)
+        model.eval()
+        output = model(features, adj)
         
     loss_val = F.nll_loss(output[idx_val], labels[idx_val])
     acc_val = accuracy(output[idx_val], labels[idx_val])
@@ -98,15 +98,16 @@ def train(epoch):
               'loss_val: {:.4f}'.format(loss_val.item()),
               'acc_val: {:.4f}'.format(acc_val.item()),
               'time: {:.4f}s'.format(time.time() - t))
-        """
+"""
         print("Epoch:", '%04d' % (epoch + 1), "train_loss=", "{:.5f}".format(outs[1]),
         "train_acc=", "{:.5f}".format(outs[2]), "val_loss=", "{:.5f}".format(cost),
         "val_acc=", "{:.5f}".format(acc), "time=", "{:.5f}".format(time.time() - t))
-        """
+"""
+"""
     if epoch > args.early_stopping and cost_val[-1] > np.mean(cost_val[-(args.early_stopping+1):-1]):
         print("aaa=========",epoch)
         print("Early stopping...")
-        break
+"""       
 
 
 def test():
