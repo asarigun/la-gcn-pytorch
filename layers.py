@@ -5,6 +5,8 @@ import torch
 from torch.nn.parameter import Parameter
 from torch.nn.modules.module import Module
 
+def mask(mask):
+    return mask
 
 class GraphConvolution(Module):
     """
