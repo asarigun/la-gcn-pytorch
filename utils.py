@@ -12,7 +12,7 @@ def encode_onehot(labels):
     return labels_onehot
 
 
-def load_data(path, dataset, attack_dimension, train_percente):
+def load_data(path, dataset):
     path = "/data/cora/"
     dataset="cora"
     """Load citation network dataset (cora only for now)"""
