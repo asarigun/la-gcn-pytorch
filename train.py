@@ -24,10 +24,10 @@ parser.add_argument('--hidden', type=int, default=16, help='Number of hidden uni
 parser.add_argument('--dropout', type=float, default=0.5, help='Dropout rate (1 - keep probability).')
 parser.add_argument('--early_stopping',type=int, default=10, help='Tolerance for early stopping (# of epochs).')
 parser.add_argument('--max_degree', type=int, default=3, help='Maximum Chebyshev polynomial degree.')
-parser.add_argument('--train_percentage', type=float, default=0.1 , help='define the percentage of training data.')
 parser.add_argument('--start_test', type=int, default=80, help='define from which epoch test')
 parser.add_argument('--train_jump', type=int, default=0, help='define whether train jump, defaul train_jump=0')
-parser.add_argument('--attack_dimension', type=int, default=0, help='define how many dimension of the node feature to attack')
+#parser.add_argument('--train_percentage', type=float, default=0.1 , help='define the percentage of training data.')
+#parser.add_argument('--attack_dimension', type=int, default=0, help='define how many dimension of the node feature to attack')
 
 
 args = parser.parse_args()
@@ -63,13 +63,13 @@ train_loss = []
 train_accuracy = []
 val_loss = []
 val_accuracy = []    
-
+"""
 train_gcnmask_gather = []
 test_gcnmask_gather = []
 val_gcnmask_gather = []
 
 best_test_result = 0
-"""
+
 
 def train(epoch):
     t = time.time()
@@ -80,25 +80,29 @@ def train(epoch):
     acc_train = accuracy(output[idx_train], labels[idx_train])
     loss_train.backward()
     optimizer.step()
+    train_gcnmask_gather.append(model.mask)
+    val_gcnmask_gather.append(val_gcnmask)
 
     if not args.fastmode:
         # Evaluate validation set performance separately,
         # deactivates dropout during validation run.
-        model.eval()
-        output = model(features, adj)
-
+    model.eval()
+    output = model(features, adj)
+        
     loss_val = F.nll_loss(output[idx_val], labels[idx_val])
     acc_val = accuracy(output[idx_val], labels[idx_val])
+        
     print('Epoch: {:04d}'.format(epoch+1),
-          'loss_train: {:.4f}'.format(loss_train.item()),
-          'acc_train: {:.4f}'.format(acc_train.item()),
-          'loss_val: {:.4f}'.format(loss_val.item()),
-          'acc_val: {:.4f}'.format(acc_val.item()),
-          'time: {:.4f}s'.format(time.time() - t))
+              'loss_train: {:.4f}'.format(loss_train.item()),
+              'acc_train: {:.4f}'.format(acc_train.item()),
+              'loss_val: {:.4f}'.format(loss_val.item()),
+              'acc_val: {:.4f}'.format(acc_val.item()),
+              'time: {:.4f}s'.format(time.time() - t))
+        """
         print("Epoch:", '%04d' % (epoch + 1), "train_loss=", "{:.5f}".format(outs[1]),
         "train_acc=", "{:.5f}".format(outs[2]), "val_loss=", "{:.5f}".format(cost),
         "val_acc=", "{:.5f}".format(acc), "time=", "{:.5f}".format(time.time() - t))
-    
+        """
     if epoch > args.early_stopping and cost_val[-1] > np.mean(cost_val[-(args.early_stopping+1):-1]):
         print("aaa=========",epoch)
         print("Early stopping...")
