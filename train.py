@@ -40,9 +40,9 @@ if args.cuda:
 
 # Load data
 adj, features, labels, idx_train, idx_val, idx_test = load_data()
-#add_all, adj, features, labels, idx_train, idx_val, idx_test = load_data()
+
 # Model and optimizer
-model = GCN_MASK(add_all, nfeat=features.shape[1],
+model = GCN_MASK(nfeat=features.shape[1],
             nhid=args.hidden,
             nclass=labels.max().item() + 1,
             dropout=args.dropout)
@@ -107,8 +107,8 @@ def train(epoch):
     if epoch > args.early_stopping and cost_val[-1] > np.mean(cost_val[-(args.early_stopping+1):-1]):
         print("aaa=========",epoch)
         print("Early stopping...")
-"""       
-
+        break
+"""
 
 def test():
     model.eval()
