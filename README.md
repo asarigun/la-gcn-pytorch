@@ -27,10 +27,6 @@ For official implementation  https://github.com/LiZhang-github/LA-GCN/tree/maste
   * PyTorch 0.4 or 0.5
   * Python 2.7 or 3.6
   
-## Installation
-
-```python setup.py install```
-
 ## Training
 
 ```bash
