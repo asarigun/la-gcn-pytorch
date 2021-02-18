@@ -27,6 +27,7 @@ For official implementation  https://github.com/LiZhang-github/LA-GCN/tree/maste
   * PyTorch 0.4 or 0.5
   * Python 2.7 or 3.6
   
+  
 ## Training
 
 ```bash
@@ -35,6 +36,6 @@ python train.py
 
 ## Reference
 
-[1] [Zhang & Lu, A Feature-Importance-Aware and Robust Aggregator for GCN, CIKM 2020](https://dl.acm.org/doi/abs/10.1145/3340531.3411983)  [![report](https://img.shields.io/badge/Official-Code-yellow)](https://github.com/LiZhang-github/LA-GCN/tree/master/code)
+[1] [Zhang & Lu, A Feature-Importance-Aware and Robust Aggregator for GCN, CIKM 2020](https://dl.acm.org/doi/abs/10.1145/3340531.3411983) [![report](https://img.shields.io/badge/Official-Code-yellow)](https://github.com/LiZhang-github/LA-GCN/tree/master/code)
 
-[2] [Kipf & Welling, Semi-Supervised Classification with Graph Convolutional Networks, 2016](https://arxiv.org/abs/1609.02907)  [![report](https://img.shields.io/badge/Official-Code-ff69b4)](https://github.com/tkipf/gcn)
+[2] [Kipf & Welling, Semi-Supervised Classification with Graph Convolutional Networks, 2016](https://arxiv.org/abs/1609.02907) [![report](https://img.shields.io/badge/Official-Code-ff69b4)](https://github.com/tkipf/gcn)
