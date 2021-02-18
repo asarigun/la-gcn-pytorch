@@ -52,7 +52,7 @@ class gcnmask(Module):
         super(gcnmask, self).__init__()
         self.in_features = in_features
         self.out_features = out_features
-        self.add_all = add_all
+        #self.add_all = add_all
         self.weight = Parameter(torch.FloatTensor(in_features, out_features))
         if bias:
             self.bias = Parameter(torch.FloatTensor(out_features))
