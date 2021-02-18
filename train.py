@@ -39,8 +39,8 @@ if args.cuda:
     torch.cuda.manual_seed(args.seed)
 
 # Load data
-add_all, adj, features, labels, idx_train, idx_val, idx_test = load_data()
-
+adj, features, labels, idx_train, idx_val, idx_test = load_data()
+#add_all, adj, features, labels, idx_train, idx_val, idx_test = load_data()
 # Model and optimizer
 model = GCN_MASK(add_all, nfeat=features.shape[1],
             nhid=args.hidden,
@@ -80,8 +80,8 @@ def train(epoch):
     acc_train = accuracy(output[idx_train], labels[idx_train])
     loss_train.backward()
     optimizer.step()
-    train_gcnmask_gather.append(model.mask)
-    val_gcnmask_gather.append(val_gcnmask)
+    #train_gcnmask_gather.append(model.mask)
+    #val_gcnmask_gather.append(val_gcnmask)
 
     if not args.fastmode:
         # Evaluate validation set performance separately,
