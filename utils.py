@@ -57,11 +57,14 @@ def load_data(path="../data/cora/", dataset="cora"):
     idx_train = torch.LongTensor(idx_train)
     idx_val = torch.LongTensor(idx_val)
     idx_test = torch.LongTensor(idx_test)
-    
+    return add_all, adj, features, labels, idx_train, idx_val, idx_test
+
+"""
     add_all = []
     for i in range(adj.shape[0]):
         add_all.append(adj[i].nonzero()[1])
-    """
+"""
+"""
     if attack_dimension > 0:     
         print('====the attacked dimention====', attack_dimension)  
     
@@ -73,8 +76,7 @@ def load_data(path="../data/cora/", dataset="cora"):
             idex_fea = features[i, at_idx].toarray()
             at_fea = np.where ( idex_fea==0,1,0 )
             features[i,at_idx] = at_fea
-    """
-    return add_all, adj, features, labels, idx_train, idx_val, idx_test
+"""
 
 
 def normalize(mx):
