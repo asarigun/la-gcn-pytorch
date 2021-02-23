@@ -6,7 +6,8 @@ from layers import *
 class GCN_MASK(nn.Module):
     def __init__(self, nfeat, nhid, nclass, dropout):
         super(GCN_MASK, self).__init__()
-        #self.add_all = add_all
+        self.add_all = []
+        self.mask = []
 
         self.gc1 = GraphConvolution(nfeat, nhid) #add_all = self.add_all
         self.gc2 = gcnmask(nhid, nclass)
