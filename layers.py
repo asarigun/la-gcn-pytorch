@@ -46,11 +46,11 @@ class gcnmask(Module):
     Simple GCN layer, similar to https://arxiv.org/abs/1609.02907
     """
 
-    def __init__(self, in_features, out_features, bias=True):
+    def __init__(self, add_all, in_features, out_features, bias=True):
         super(gcnmask, self).__init__()
         self.in_features = in_features
         self.out_features = out_features
-        #self.add_all = add_all
+        self.add_all = add_all
         self.weight = Parameter(torch.FloatTensor(in_features, out_features))
         if bias:
             self.bias = Parameter(torch.FloatTensor(out_features))
@@ -58,6 +58,16 @@ class gcnmask(Module):
             self.register_parameter('bias', None)
         self.reset_parameters()
         self.mask = []
+"""
+        with tf.variable_scope(self.name + '_vars'):
+            
+            self.vars['weights_0'] = glorot([input_dim, output_dim], name = 'weights_0')
+            if self.bias:
+                self.vars['bias'] = zeros([output_dim], name='bias')
+
+            self.vars['weights_mask0'] = tf.get_variable(name = 'weights_mask0', shape=[2*input_dim,input_dim],\
+                                          dtype=tf.float32, initializer = tf.contrib.layers.xavier_initializer()) 
+"""
 
     def reset_parameters(self):
         stdv = 1. / math.sqrt(self.weight.size(1))
