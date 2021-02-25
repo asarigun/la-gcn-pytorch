@@ -5,7 +5,7 @@ import torch
 from torch.nn.parameter import Parameter
 from torch.nn.modules.module import Module
 
-"""
+
 class GraphConvolution(Module):
 """
 #    Simple GCN layer, similar to https://arxiv.org/abs/1609.02907
@@ -40,7 +40,7 @@ class GraphConvolution(Module):
         return self.__class__.__name__ + ' (' \
                + str(self.in_features) + ' -> ' \
                + str(self.out_features) + ')'
-"""
+    
 class gcnmask(Module):
 
     def __init__(self, add_all, in_features, out_features, bias=True):
