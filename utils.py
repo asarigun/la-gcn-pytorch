@@ -57,11 +57,12 @@ def load_data(path="data/cora/", dataset="cora"):
     idx_train = torch.LongTensor(idx_train)
     idx_val = torch.LongTensor(idx_val)
     idx_test = torch.LongTensor(idx_test)
-    return adj, features, labels, idx_train, idx_val, idx_test
     
-    #add_all = []
-    #for i in range(adj.shape[0]):
-    #    add_all.append(adj[i].nonzero()[1])
+    add_all = []
+    for i in range(adj.shape[0]):
+        add_all.append(adj[i].nonzero()[1])
+        
+    return add_all, adj, features, labels, idx_train, idx_val, idx_test
     """
     if attack_dimension > 0:     
         print('====the attacked dimention====', attack_dimension)  
