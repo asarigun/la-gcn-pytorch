@@ -10,7 +10,7 @@ class GCN_MASK(nn.Module):
         self.mask = []
 
         self.gc1 = GraphConvolution(nfeat, nhid) #add_all = self.add_all
-        self.gc2 = gcnmask(nhid, nclass)
+        self.gc2 = gcnmask(add_all = self.add_all, nhid, nclass)
         self.dropout = dropout
         
     def _mask(self):
