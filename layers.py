@@ -58,6 +58,7 @@ class gcnmask(Module):
             self.register_parameter('bias', None)
         self.reset_parameters()
         self.mask = []
+        self.weights_mask = nn.Module.get_parameter("weights_mask", shape=[2*in_features,in_features], initializer='uniform')
 """
         with tf.variable_scope(self.name + '_vars'):
             
@@ -65,8 +66,7 @@ class gcnmask(Module):
             if self.bias:
                 self.vars['bias'] = zeros([output_dim], name='bias')
 
-            self.vars['weights_mask0'] = tf.get_variable(name = 'weights_mask0', shape=[2*input_dim,input_dim],\
-                                          dtype=tf.float32, initializer = tf.contrib.layers.xavier_initializer()) 
+            self.vars['weights_mask0'] = tf.get_variable(name = 'weights_mask0', shape=[2*input_dim,input_dim],\dtype=tf.float32, initializer = tf.contrib.layers.xavier_initializer()) 
 """
 
     def reset_parameters(self):
@@ -76,12 +76,14 @@ class gcnmask(Module):
             self.bias.data.uniform_(-stdv, stdv)
 
     def forward(self, input, adj):
+"""
         support = torch.mm(input, self.weight)
         output = torch.spmm(adj, support)
         if self.bias is not None:
             return output + self.bias
         else:
             return output
+"""
         input_new = []
         for i in range(len(self.add_all)):
             aa = torch.gather(input, [i])
@@ -89,7 +91,7 @@ class gcnmask(Module):
             bb_nei = torch.gather(input,self.add_all[i])
             cen_nei = torch.cat([aa_tile, bb_nei],1)
                                       
-            mask0 = dot(cen_nei, self.W, sparse = self.sparse_inputs)
+            mask0 = dot(cen_nei, self.weights_mask, sparse = self.sparse_inputs)
             mask0 = nn.Sigmoid(mask0)
             mask = nn.Dropout(mask0, 1-self.dropout)
                                       
