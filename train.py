@@ -39,7 +39,7 @@ if args.cuda:
     torch.cuda.manual_seed(args.seed)
 
 # Load data
-adj, features, labels, idx_train, idx_val, idx_test = load_data()
+add_all, adj, features, labels, idx_train, idx_val, idx_test = load_data()
 
 # Model and optimizer
 model = GCN_MASK(nfeat=features.shape[1],
