@@ -29,7 +29,7 @@ def load_data(path="data/cora/", dataset="cora"):
     edges = np.array(list(map(idx_map.get, edges_unordered.flatten())),
                      dtype=np.int32).reshape(edges_unordered.shape)
     
-    adj = nx.adjacency_matrix(nx.from_dict_of_lists(graph))
+    #adj = nx.adjacency_matrix(nx.from_dict_of_lists(graph))
     
     add_all = []
     for i in range(adj.shape[0]):
