@@ -1,7 +1,7 @@
 import numpy as np
 import scipy.sparse as sp
 import torch
-
+import networkx as nx
 
 def encode_onehot(labels):
     classes = set(labels)
@@ -28,6 +28,13 @@ def load_data(path="data/cora/", dataset="cora"):
                                     dtype=np.int32)
     edges = np.array(list(map(idx_map.get, edges_unordered.flatten())),
                      dtype=np.int32).reshape(edges_unordered.shape)
+    
+    adj = nx.adjacency_matrix(nx.from_dict_of_lists(graph))
+    
+    add_all = []
+    for i in range(adj.shape[0]):
+        add_all.append(adj[i].nonzero()[1])
+        
     adj = sp.coo_matrix((np.ones(edges.shape[0]), (edges[:, 0], edges[:, 1])),
                         shape=(labels.shape[0], labels.shape[0]),
                         dtype=np.float32)
@@ -56,12 +63,8 @@ def load_data(path="data/cora/", dataset="cora"):
 
     idx_train = torch.LongTensor(idx_train)
     idx_val = torch.LongTensor(idx_val)
-    idx_test = torch.LongTensor(idx_test)
-    
-    add_all = []
-    for i in range(adj.shape[0]):
-        add_all.append(adj[i].nonzero()[1])
-        
+    idx_test = torch.LongTensor(idx_test)   
+       
     return add_all, adj, features, labels, idx_train, idx_val, idx_test
     """
     if attack_dimension > 0:     
@@ -77,8 +80,6 @@ def load_data(path="data/cora/", dataset="cora"):
             features[i,at_idx] = at_fea
     """
     
-
-
 def normalize(mx):
     """Row-normalize sparse matrix"""
     rowsum = np.array(mx.sum(1))
