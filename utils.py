@@ -29,15 +29,13 @@ def load_data(path="data/cora/", dataset="cora"):
     edges = np.array(list(map(idx_map.get, edges_unordered.flatten())),
                      dtype=np.int32).reshape(edges_unordered.shape)
     
-    #adj = nx.adjacency_matrix(nx.from_dict_of_lists(graph))
-    
-    add_all = []
-    for i in range(adj.shape[0]):
-        add_all.append(adj[i].nonzero()[1])
-        
+    #adj = nx.adjacency_matrix(nx.from_dict_of_lists(graph))          
     adj = sp.coo_matrix((np.ones(edges.shape[0]), (edges[:, 0], edges[:, 1])),
                         shape=(labels.shape[0], labels.shape[0]),
                         dtype=np.float32)
+    add_all = []
+    for i in range(adj.shape[0]):
+        add_all.append(adj[i].nonzero()[1])
 
     # build symmetric adjacency matrix
     adj = adj + adj.T.multiply(adj.T > adj) - adj.multiply(adj.T > adj)
