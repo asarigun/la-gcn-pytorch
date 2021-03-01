@@ -53,7 +53,8 @@ class gcnmask(Module):
             self.register_parameter('bias', None)
         self.reset_parameters()
         self.mask = []
-        self.weights_mask = nn.Module.get_parameter("weights_mask", shape=[2*in_features,in_features], dtype=torch.float32, initializer='uniform')
+        self.weights_mask = Parameter(torch.FloatTensor(2*in_features, in_features))
+        #self.weights_mask = nn.Module.get_parameter("weights_mask", shape=[2*in_features,in_features], dtype=torch.float32, initializer='uniform')
 
     def reset_parameters(self):
         stdv = 1. / math.sqrt(self.weight.size(1))
