@@ -8,7 +8,7 @@ class GCN_MASK(nn.Module):
         super(GCN_MASK, self).__init__()
         self.add_all = []
         self.mask = []
-        add_all =  = self.add_all
+        add_all = self.add_all
         self.gc1 = GraphConvolution(nfeat, nhid) #add_all = self.add_all
         self.gc2 = gcnmask(add_all, nhid, nclass)
         self.dropout = dropout
