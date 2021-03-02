@@ -79,9 +79,13 @@ class gcnmask(Module):
             self.mask.append(mask)
                                       
             new_cen_nei = aa + torch.sum(mask * bb_nei, 0, keepdims=True) #hadamard product of neighbors' feature vector and mask aggregator, then applying sum aggregator
-            input_new.append(new_cen_nei)
-                                      
+            input_new.append(new_cen_nei)                                      
+        #print(input_new)
+        #print(self.add_all)
+        input_new = torch.FloatTensor(input_new)                                        
         input_new = torch.squeeze(input_new)
+        #print(input_new.shape)
+        #print(self.weight.shape)
         #pre_sup = dot(input_new, self.weight) #sparse=self.sparse_inputs
         #return self.act(pre_sup)
         support = torch.mm(input_new, self.weight)
