@@ -41,19 +41,19 @@ class GraphConvolution(Module):
     
 class gcnmask(Module):
 
-    def __init__(self, add_all, in_features, out_features, bias=True):
+    def __init__(self, add_all, in_features, out_features, bias=False): #bias = True
         super(gcnmask, self).__init__()
         self.in_features = in_features
         self.out_features = out_features
         self.add_all = add_all
-        self.weight = Parameter(torch.FloatTensor(in_features, out_features))
+        self.weight_0 = Parameter(torch.FloatTensor(in_features, out_features))
         if bias:
             self.bias = Parameter(torch.FloatTensor(out_features))
         else:
             self.register_parameter('bias', None)
         self.reset_parameters()
         self.mask = []
-        self.weights_mask = Parameter(torch.FloatTensor(2*in_features, in_features))
+        self.weights_mask0 = Parameter(torch.FloatTensor(2*in_features, in_features))
         #self.weights_mask = nn.Module.get_parameter("weights_mask", shape=[2*in_features,in_features], dtype=torch.float32, initializer='uniform')
 
     def reset_parameters(self):
@@ -72,7 +72,7 @@ class gcnmask(Module):
             cen_nei = torch.cat([aa_tile, bb_nei],1)
                                       
             #mask0 = dot(cen_nei, self.weights_mask, sparse = self.sparse_inputs)
-            mask0 = torch.mm(cen_nei, self.weights_mask) #, sparse = self.sparse_inputs
+            mask0 = torch.mm(cen_nei, self.weights_mask0) #, sparse = self.sparse_inputs
             mask0 = nn.Sigmoid(mask0)
             mask = nn.Dropout(mask0, 1-self.dropout)
                                       
@@ -88,7 +88,7 @@ class gcnmask(Module):
         #print(self.weight.shape)
         #pre_sup = dot(input_new, self.weight) #sparse=self.sparse_inputs
         #return self.act(pre_sup)
-        support = torch.mm(input_new, self.weight)
+        support = torch.mm(input_new, self.weight_0)
         output = torch.spmm(adj, support)
         if self.bias is not None:
             return output + self.bias
