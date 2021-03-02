@@ -33,7 +33,9 @@ def load_data(path="data/cora/", dataset="cora"):
     adj = sp.coo_matrix((np.ones(edges.shape[0]), (edges[:, 0], edges[:, 1])),
                         shape=(labels.shape[0], labels.shape[0]),
                         dtype=np.float32)
+    print(adj.shape)
     adj = adj.tocsr()
+    print(adj.shape)
     add_all = []
     for i in range(adj.shape[0]):
         add_all.append(adj[i].nonzero()[1])
