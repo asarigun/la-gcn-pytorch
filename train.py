@@ -42,7 +42,7 @@ if args.cuda:
 add_all, adj, features, labels, idx_train, idx_val, idx_test = load_data()
 
 # Model and optimizer
-model = GCN_MASK(nfeat=features.shape[1],
+model = GCN_MASK(add_all, nfeat=features.shape[1],
             nhid=args.hidden,
             nclass=labels.max().item() + 1,
             dropout=args.dropout)
