@@ -58,7 +58,7 @@ class gcnmask(Module):
 
     def reset_parameters(self):
         stdv = 1. / math.sqrt(self.weight.size(1))
-        self.weight.data.uniform_(-stdv, stdv)
+        self.weight_0.data.uniform_(-stdv, stdv)
         if self.bias is not None:
             self.bias.data.uniform_(-stdv, stdv)
 
