@@ -66,9 +66,9 @@ class gcnmask(Module):
 
         input_new = []
         for i in range(len(self.add_all)):
-            aa = torch.gather(input, [i])
-            aa_tile = torch.tile(aa, [len(self.add_all[i]), 1]) #expand central
-            bb_nei = torch.gather(input,self.add_all[i])
+            aa = torch.gather(input, [i]) #converting from tf to torch, what is index here?
+            aa_tile = torch.tile(aa, [len(self.add_all[i]), 1]) #expand central 
+            bb_nei = torch.gather(input,self.add_all[i]) #converting from tf to torch, what is index here?
             cen_nei = torch.cat([aa_tile, bb_nei],1)
                                       
             #mask0 = dot(cen_nei, self.weights_mask, sparse = self.sparse_inputs)
