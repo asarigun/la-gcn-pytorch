@@ -35,6 +35,7 @@ def load_data(path="data/cora/", dataset="cora"):
                         dtype=np.float32)
     print(adj)
     adj = adj.tocsr() #sorun burdan kaynaklanıyor!!!
+    #adj = adj.tolil()
     print("------")
     print(adj)
     add_all = []
