@@ -66,6 +66,27 @@ class gcnmask(Module):
 
         input_new = []
         for i in range(len(self.add_all)):
+            """
+            print("Loading input:")
+            print(input)
+            print("Loading shape of input:")
+            print(input.shape)
+            index = np.array([i])
+            print("Loading index")
+            print(index)
+            index = torch.from_numpy(index)
+            print("Loading index")
+            print(index)
+            index = np.array([i]) 
+            print("Loading index")
+            print(index)
+            index = torch.from_numpy(index).long()
+            print("Loading index")
+            print(index)
+            index = index.unsqueeze(1)
+            print("Loading index")
+            print(index)
+            aa = torch.gather(input, 0, index)"""
             aa = torch.gather(input, [i]) #converting from tf to torch, what is index here?
             aa_tile = torch.tile(aa, [len(self.add_all[i]), 1]) #expand central 
             bb_nei = torch.gather(input,self.add_all[i]) #converting from tf to torch, what is index here?
