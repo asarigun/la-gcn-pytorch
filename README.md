@@ -1,8 +1,6 @@
 # Learnable Aggregator for Graph Convolutional Networks in PyTorch
 
 
-[![report](https://img.shields.io/badge/Paper-Report-red)](https://dl.acm.org/doi/abs/10.1145/3340531.3411983)  [![report](https://img.shields.io/badge/Poster-NeurIPS2019-brown)](https://grlearning.github.io/papers/134.pdf)  [![report](https://img.shields.io/badge/TensorFlow-Implementation-ff69b4)](https://github.com/asarigun/LA-GCN)  [![License](https://img.shields.io/github/license/thudm/cogdl)](https://github.com/asarigun/la-gcn-torch/blob/main/LICENSE) 
-
 <p align="center">
   <a href="https://dl.acm.org/doi/abs/10.1145/3340531.3411983"><img src="https://img.shields.io/badge/Paper-Report-red"/></a>
   <a href="https://grlearning.github.io/papers/134.pdf"><img src="https://img.shields.io/badge/Poster-NeurIPS2019-brown"/></a>
