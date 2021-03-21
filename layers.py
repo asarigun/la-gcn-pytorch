@@ -66,31 +66,42 @@ class gcnmask(Module):
 
         input_new = []
         for i in range(len(self.add_all)):
-            """
-            print("Loading input:")
-            print(input)
-            print("Loading shape of input:")
-            print(input.shape)
+            #listeyle x i torh.gather'da birleştirebilirmiyiz
+            #t=np.random.randint(1,10,[4,5])
+            print("Loading input:", input)
+            print("Loading shape of input:",input.shape)
+            print("Loading type of [i]:", type([i]))
             index = np.array([i])
-            print("Loading index")
-            print(index)
+            print("Loading index:",index)
             index = torch.from_numpy(index)
-            print("Loading index")
-            print(index)
-            index = np.array([i]) 
-            print("Loading index")
-            print(index)
-            index = torch.from_numpy(index).long()
-            print("Loading index")
-            print(index)
-            index = index.unsqueeze(1)
-            print("Loading index")
-            print(index)
-            aa = torch.gather(input, 0, index)"""
-            aa = torch.gather(input, [i]) #converting from tf to torch, what is index here?
+            print("Loading index:", index)
+            index0 = np.array([i]) 
+            print("Loading index:", index)
+            index = torch.from_numpy(index0).long()
+            print("Loading index:" , index)
+            index = index.unsqueeze(0)
+            print("Loading index:" , index)
+            #index = index.expand(1,shape([i])) 
+            #index = index.squeeze()
+            aa = torch.gather(input, 0, index) #converting from tf to torch, what is index here?
+            print("Loading aa" , aa)
+            print("Loading shape of aa:" , aa.shape)
             aa_tile = torch.tile(aa, [len(self.add_all[i]), 1]) #expand central 
-            bb_nei = torch.gather(input,self.add_all[i]) #converting from tf to torch, what is index here?
+            print("Loading aa_tile:" , aa_tile)
+            bb_nei_index = np.array(self.add_all[i])
+            print("Loading bb_nei_index:" ,bb_nei_index)
+            bb_nei_index = torch.from_numpy(bb_nei_index)
+            print("Loading bb_nei_index:" , bb_nei_index)
+            bb_nei_index = np.array(self.add_all[i]) 
+            print("Loading bb_nei_index:", bb_nei_index)
+            bb_nei_index = torch.from_numpy(bb_nei_index).long()
+            print("Loading bb_nei_index:", bb_nei_index)
+            bb_nei_index = bb_nei_index.unsqueeze(1)
+            print("Loading bb_nei_index:", bb_nei_index)
+            bb_nei = torch.gather(input,0, bb_nei_index) #converting from tf to torch, what is index here?
+            print("Loading bb_nei:", bb_nei)
             cen_nei = torch.cat([aa_tile, bb_nei],1)
+            print("Loading cen_nei:", cen_nei)
                                       
             #mask0 = dot(cen_nei, self.weights_mask, sparse = self.sparse_inputs)
             mask0 = torch.mm(cen_nei, self.weights_mask0) #, sparse = self.sparse_inputs
