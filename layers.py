@@ -83,7 +83,7 @@ class gcnmask(Module):
             print("Loading index:" , index)
             #index = index.expand(1,shape([i])) 
             #index = index.squeeze()
-            aa = torch.gather(input, 0, index) #converting from tf to torch, what is index here?
+            aa = torch.gather(input, 0, torch.tensor([[i]*input.shape[1]])) 
             print("Loading aa" , aa)
             print("Loading shape of aa:" , aa.shape)
             aa_tile = torch.tile(aa, [len(self.add_all[i]), 1]) #expand central 
