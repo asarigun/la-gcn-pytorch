@@ -9,7 +9,7 @@ import torch
 import torch.nn.functional as F
 import torch.optim as optim
 
-from utils import load_data, accuracy
+from utils_new import load_data, accuracy
 from models import *
 
 # Training settings
