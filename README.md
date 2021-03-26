@@ -12,7 +12,7 @@
 
 <p align="center"><img width="40%" src="https://github.com/asarigun/la-gcn-torch/blob/main/images/pytorch.png"></p>
 
-Implementation of of Learnable Aggregators for Graph Convolutional Networks in PyTorch.
+Implementation of of Learnable Aggregators for Graph Convolutional Networks in PyTorch. 
 
 ![LA-GCN with Mask Aggregator](https://github.com/asarigun/la-gcn-torch/blob/main/images/model.jpg)
 
