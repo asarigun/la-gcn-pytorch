@@ -25,7 +25,7 @@ def sample_mask(idx, l):
     return np.array(mask, dtype=np.bool)
 
 
-def load_data(dataset="cora"): #fastgcn_setting,, train_percente, attack_dimension,train_jump
+def load_data(dataset="cora"): 
     """Load data."""
     names = ['x', 'y', 'tx', 'ty', 'allx', 'ally', 'graph']
     #pdb.set_trace()
@@ -80,64 +80,21 @@ def load_data(dataset="cora"): #fastgcn_setting,, train_percente, attack_dimensi
         idx_train = range(len(y)+18157)     
         idx_val = range(len(y)+18157, len(y)+18157+500)
         print("==== the fastgcn dataset split for pubmed ====", len(idx_train)) 
-    """
-    else:
-
-
-        print('===choose the training data as propotio===', train_percente)
-        train_number = int(train_percente * labels.shape[0])
-        idx_train = range(train_number)
-        idx_val = range(train_number, train_number+500)
-"""
-
-    """
-    train_mask = sample_mask(idx_train, labels.shape[0]) # the training index is true, others is false
-    val_mask = sample_mask(idx_val, labels.shape[0])
-    test_mask = sample_mask(idx_test, labels.shape[0])
-
-    y_train = np.zeros(labels.shape)
-    y_val = np.zeros(labels.shape)
-    y_test = np.zeros(labels.shape)
-    y_train[train_mask, :] = labels[train_mask, :]
-    y_val[val_mask, :] = labels[val_mask, :]
-    y_test[test_mask, :] = labels[test_mask, :]
-    """
+    
     ## find each node's neighbors
     add_all = []
     for i in range(adj.shape[0]):
         add_all.append(adj[i].nonzero()[1])
-        #print(i)
-        #print(add_all)
-    print("Loading add_all:")
-    print(add_all)
+
     features = torch.FloatTensor(np.array(features.todense()))
-    #print("Loading features:", features)
     labels = torch.LongTensor(np.where(labels)[1])
-    #print("Loading labels:", labels)
     adj = sparse_mx_to_torch_sparse_tensor(adj)
-    #print("Loading adj:", adj)
     idx_train = torch.LongTensor(idx_train)
-    #print("Loading idx_train:", idx_train)
     idx_val = torch.LongTensor(idx_val)
-    #print("Loading idx_val:", idx_val)
     idx_test = torch.LongTensor(idx_test)   
-    #print("Loading idx_test:", idx_test) 
-    """
-    if attack_dimension > 0:     
-        print('====the attacked dimention====', attack_dimension)  
 
-    # attack node featues (the random  dimension)
-        at_d = attack_dimension 
-        for i in range(features.shape[0]):
-
-            at_idx = np.random.choice(features.shape[1], size=at_d, replace=False)
-            idex_fea = features[i, at_idx].toarray()
-            at_fea = np.where ( idex_fea==0,1,0 )
-            features[i,at_idx] = at_fea
-    """
     return add_all, adj, features, labels, idx_train, idx_val, idx_test
 
-    #add_all, adj, features, y_train, y_val, y_test, train_mask, val_mask, test_mask
 
 def normalize(mx):
     """Row-normalize sparse matrix"""
