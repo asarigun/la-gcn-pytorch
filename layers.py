@@ -68,9 +68,7 @@ class gcnmask(Module):
         self.weight_0.data.uniform_(-stdv, stdv)
         if self.bias is not None:
             self.bias.data.uniform_(-stdv, stdv)
-
     
-
     def forward(self, input, adj):
 
         input_new = []
@@ -84,13 +82,13 @@ class gcnmask(Module):
             bb_nei_index2 = torch.tensor(bb_nei_index2)
             bb_nei = torch.gather(input,0, torch.tensor(bb_nei_index2)) 
             cen_nei = torch.cat([aa_tile, bb_nei],1)
-            mask0 = torch.mm(cen_nei, self.weights_mask0) #, sparse = self.sparse_inputs
+            mask0 = torch.mm(cen_nei, self.weights_mask0) 
             mask0 = self.Sig(mask0)
             mask0 = F.dropout(mask0, self.drop_rate)
                                       
             self.mask.append(mask0)
                                       
-            new_cen_nei = aa + torch.sum(mask0 * bb_nei, 0, keepdims=True) #hadamard product of neighbors' feature vector and mask aggregator, then applying sum aggregator
+            new_cen_nei = aa + torch.sum(mask0 * bb_nei, 0, keepdims=True) #hadamard product of neighbors' features  and mask aggregator, then applying sum aggregator
             input_new.append(new_cen_nei)                                      
             
         input_new = torch.stack(input_new)                                     
