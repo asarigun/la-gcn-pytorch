@@ -6,6 +6,7 @@
   <a href="https://grlearning.github.io/papers/134.pdf"><img src="https://img.shields.io/badge/Poster-NeurIPS2019-brown"/></a>
   <a href="https://github.com/asarigun/LA-GCN"><img src="https://img.shields.io/badge/TensorFlow-Implementation-ff69b4"/></a>
   <a href="https://github.com/asarigun/la-gcn-torch/blob/main/LICENSE"><img src="https://img.shields.io/github/license/thudm/cogdl"/></a>
+  <a href="https://colab.research.google.com/drive/1BurTEjf6sqtIfnVn9FdCGxBwiCCHiNAN?usp=sharing" alt="license"><img src="https://colab.research.google.com/assets/colab-badge.svg"/></a>
 </p>
 
 
@@ -16,12 +17,12 @@ Implementation of of Learnable Aggregators for Graph Convolutional Networks in P
 ![LA-GCN with Mask Aggregator](https://github.com/asarigun/la-gcn-torch/blob/main/images/model.jpg)
 
 
-"Learnable Aggregator for GCN (LA-GCN) by introducing a shared auxiliary model that provides a
+Learnable Aggregator for GCN (LA-GCN) by introducing a shared auxiliary model that provides a
 customized schema in neighborhood aggregation. Under this framework, a new model proposed called
 LA-GCN(Mask) consisting of a new aggregator function, mask aggregator. The auxiliary model
 learns a specific mask for each neighbor of a given node, allowing both node-level and feature-level 
 attention. This mechanism learns to assign different importance to both nodes and features for prediction, 
-which provides interpretable explanations for prediction and increases the model robustness."
+which provides interpretable explanations for prediction and increases the model robustness.
 
 Li  Zhang ,Haiping  Lu, https://dl.acm.org/doi/abs/10.1145/3340531.3411983 (CIKM 2020) 
 
