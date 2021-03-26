@@ -49,6 +49,9 @@ model = GCN_MASK(add_all, nfeat=features.shape[1],
 optimizer = optim.Adam(model.parameters(),
                        lr=args.lr, weight_decay=args.weight_decay)
 
+print("Loading nfeat :")
+print(features.shape)
+
 if args.cuda:
     model.cuda()
     features = features.cuda()
@@ -57,18 +60,6 @@ if args.cuda:
     idx_train = idx_train.cuda()
     idx_val = idx_val.cuda()
     idx_test = idx_test.cuda()
-
-"""
-train_loss = []
-train_accuracy = []
-val_loss = []
-val_accuracy = []    
-"""
-train_gcnmask_gather = []
-test_gcnmask_gather = []
-val_gcnmask_gather = []
-
-best_test_result = 0
 
 
 def train(epoch):
@@ -80,8 +71,6 @@ def train(epoch):
     acc_train = accuracy(output[idx_train], labels[idx_train])
     loss_train.backward()
     optimizer.step()
-    #train_gcnmask_gather.append(model.mask)
-    #val_gcnmask_gather.append(val_gcnmask)
 
     if not args.fastmode:
         # Evaluate validation set performance separately,
@@ -98,17 +87,6 @@ def train(epoch):
               'loss_val: {:.4f}'.format(loss_val.item()),
               'acc_val: {:.4f}'.format(acc_val.item()),
               'time: {:.4f}s'.format(time.time() - t))
-"""
-        print("Epoch:", '%04d' % (epoch + 1), "train_loss=", "{:.5f}".format(outs[1]),
-        "train_acc=", "{:.5f}".format(outs[2]), "val_loss=", "{:.5f}".format(cost),
-        "val_acc=", "{:.5f}".format(acc), "time=", "{:.5f}".format(time.time() - t))
-"""
-"""
-    if epoch > args.early_stopping and cost_val[-1] > np.mean(cost_val[-(args.early_stopping+1):-1]):
-        print("aaa=========",epoch)
-        print("Early stopping...")
-        break
-"""
 
 def test():
     model.eval()
