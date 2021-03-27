@@ -24,10 +24,9 @@ learns a specific mask for each neighbor of a given node, allowing both node-lev
 attention. This mechanism learns to assign different importance to both nodes and features for prediction, 
 which provides interpretable explanations for prediction and increases the model robustness.
 
-Li  Zhang ,Haiping  Lu, https://dl.acm.org/doi/abs/10.1145/3340531.3411983 (CIKM 2020) 
+Li  Zhang ,Haiping  Lu, [A Feature-Importance-Aware and Robust Aggregator for GCN](https://dl.acm.org/doi/abs/10.1145/3340531.3411983) (CIKM 2020) 
 
-For official implementation  https://github.com/LiZhang-github/LA-GCN/tree/master/code
-
+For official implementation  [![report](https://img.shields.io/badge/Official-Code-yellow)](https://github.com/LiZhang-github/LA-GCN/tree/master/code)
 
 ## Requirements
 
