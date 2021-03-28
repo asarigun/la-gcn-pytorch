@@ -44,7 +44,7 @@ class GraphConvolution(Module):
     
 class gcnmask(Module):
 
-    def __init__(self, add_all, in_features, out_features, bias=False): #bias = True
+    def __init__(self, add_all, in_features, out_features, bias=False): 
         super(gcnmask, self).__init__()
         self.in_features = in_features
         self.Sig = nn.Sigmoid()
