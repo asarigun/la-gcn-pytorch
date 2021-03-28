@@ -49,8 +49,7 @@ model = GCN_MASK(add_all, nfeat=features.shape[1],
 optimizer = optim.Adam(model.parameters(),
                        lr=args.lr, weight_decay=args.weight_decay)
 
-print("Loading nfeat :")
-print(features.shape)
+
 
 if args.cuda:
     model.cuda()
