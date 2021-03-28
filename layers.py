@@ -60,8 +60,6 @@ class gcnmask(Module):
         self.reset_parameters()
         self.mask = []
         self.weights_mask0 = Parameter(torch.FloatTensor(2*in_features, in_features))
-        print("Loading weight shape:")
-        print(self.weights_mask0.shape)
 
     def reset_parameters(self):
         stdv = 1. / math.sqrt(self.weight_0.size(1))
