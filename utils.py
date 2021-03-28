@@ -28,7 +28,7 @@ def sample_mask(idx, l):
 def load_data(dataset="cora"): 
     """Load data."""
     names = ['x', 'y', 'tx', 'ty', 'allx', 'ally', 'graph']
-    #pdb.set_trace()
+
     objects = []
     for i in range(len(names)):
         with open("data/ind.{}.{}".format(dataset, names[i]), 'rb') as f:
@@ -58,7 +58,7 @@ def load_data(dataset="cora"):
 
     features[test_idx_reorder, :] = features[test_idx_range, :]
     adj = nx.adjacency_matrix(nx.from_dict_of_lists(graph))
-    #print(adj)
+
     labels = np.vstack((ally, ty))
     labels[test_idx_reorder, :] = labels[test_idx_range, :]
 
@@ -68,18 +68,18 @@ def load_data(dataset="cora"):
             
         idx_train = range(len(y)+1068)
         idx_val = range(len(y)+1068,len(y)+1068+500 )
-        print("==== the fastgcn dataset split for cora ====", len(idx_train))
+
 
     elif dataset == 'citeseer':   
 
         idx_train = range(len(y)+1707)
         idx_val = range(len(y)+1707, len(y)+1707+500)           
-        print("==== the fastgcn dataset split for citeseer ====", len(idx_train)) 
+     
         
     elif dataset == 'pubmed':   
         idx_train = range(len(y)+18157)     
         idx_val = range(len(y)+18157, len(y)+18157+500)
-        print("==== the fastgcn dataset split for pubmed ====", len(idx_train)) 
+   
     
     ## find each node's neighbors
     add_all = []
