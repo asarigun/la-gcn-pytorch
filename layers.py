@@ -47,7 +47,7 @@ class gcnmask(Module):
     def __init__(self, add_all, in_features, out_features, bias=False): 
         super(gcnmask, self).__init__()
         self.in_features = in_features
-        self.Rel = nn.ReLU()
+        self.Sig = nn.Sigmoid()
         self.out_features = out_features
         self.add_all = add_all
         self.drop_rate = 0.5
@@ -81,7 +81,7 @@ class gcnmask(Module):
             bb_nei = torch.gather(input,0, torch.tensor(bb_nei_index2)) 
             cen_nei = torch.cat([aa_tile, bb_nei],1)
             mask0 = torch.mm(cen_nei, self.weights_mask0) 
-            mask0 = self.Rel(mask0)
+            mask0 = self.Sig(mask0)
             mask0 = F.dropout(mask0, self.drop_rate)
                                       
             self.mask.append(mask0)
