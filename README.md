@@ -40,6 +40,11 @@ For official implementation  [![report](https://img.shields.io/badge/Official-Co
 python train.py
 ```
 
+You can also try out in colab if you don't have any requirements! <a href="https://colab.research.google.com/drive/1BurTEjf6sqtIfnVn9FdCGxBwiCCHiNAN?usp=sharing" alt="license"><img src="https://colab.research.google.com/assets/colab-badge.svg"/></a>
+
+Note: Since random inits, your training results may not exact the same as reported in the paper!
+
+
 ## Reference
 
 [1] [Zhang & Lu, A Feature-Importance-Aware and Robust Aggregator for GCN, CIKM 2020](https://dl.acm.org/doi/abs/10.1145/3340531.3411983) [![report](https://img.shields.io/badge/Official-Code-yellow)](https://github.com/LiZhang-github/LA-GCN/tree/master/code)
