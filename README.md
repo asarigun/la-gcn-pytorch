@@ -44,9 +44,9 @@ You can also try out in colab if you don't have any requirements! <a href="https
 
 Note: Since random inits, your training results may not exact the same as reported in the paper!
 
-## Data
+## Data^[2]
 
-"In order to use your own data, you have to provide 
+In order to use your own data, you have to provide 
 * an N by N adjacency matrix (N is the number of nodes), 
 * an N by D feature matrix (D is the number of features per node), and
 * an N by E binary label matrix (E is the number of classes).
@@ -69,7 +69,7 @@ python train.py --dataset cora
 ```bash
 python train.py --dataset pubmed
 ```
-(or by editing `train.py`)"
+(or by editing `train.py`)
 
 ## Reference
 
