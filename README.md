@@ -49,7 +49,7 @@ Note: Since random inits, your training results may not exact the same as report
 "In order to use your own data, you have to provide 
 * an N by N adjacency matrix (N is the number of nodes), 
 * an N by D feature matrix (D is the number of features per node), and
-* an N by E binary label matrix (E is the number of classes).[[2](https://github.com/tkipf/pygcn)]
+* an N by E binary label matrix (E is the number of classes).[[2](https://arxiv.org/abs/1609.02907)]
 
 Have a look at the `load_data()` function in `utils.py` for an example.
 
