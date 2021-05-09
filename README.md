@@ -22,7 +22,7 @@ customized schema in neighborhood aggregation. Under this framework, a new model
 LA-GCN(Mask) consisting of a new aggregator function, mask aggregator. The auxiliary model
 learns a specific mask for each neighbor of a given node, allowing both node-level and feature-level 
 attention. This mechanism learns to assign different importance to both nodes and features for prediction, 
-which provides interpretable explanations for prediction and increases the model robustness. [[1](https://dl.acm.org/doi/abs/10.1145/3340531.3411983)]
+which provides interpretable explanations for prediction and increases the model robustness. [1]<!--[[1](https://dl.acm.org/doi/abs/10.1145/3340531.3411983)]-->
 
 Li  Zhang ,Haiping  Lu, [A Feature-Importance-Aware and Robust Aggregator for GCN](https://dl.acm.org/doi/abs/10.1145/3340531.3411983) (CIKM 2020) 
 
@@ -49,7 +49,7 @@ Note: Since random inits, your training results may not exact the same as report
 In order to use your own data, you have to provide 
 * an N by N adjacency matrix (N is the number of nodes), 
 * an N by D feature matrix (D is the number of features per node), and
-* an N by E binary label matrix (E is the number of classes). [[2](https://arxiv.org/abs/1609.02907)]
+* an N by E binary label matrix (E is the number of classes). [2]<!--[[2](https://arxiv.org/abs/1609.02907)]-->
 
 Have a look at the `load_data()` function in `utils.py` for an example.
 
