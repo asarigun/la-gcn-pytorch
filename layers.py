@@ -58,7 +58,7 @@ class gcnmask(Module):
         else:
             self.register_parameter('bias', None)
         self.reset_parameters()
-        self.mask = []
+        
         self.weights_mask0 = Parameter(torch.FloatTensor(2*in_features, in_features))
 
     def reset_parameters(self):
@@ -84,7 +84,6 @@ class gcnmask(Module):
             mask0 = self.Sig(mask0)
             mask0 = F.dropout(mask0, self.drop_rate)
                                       
-            self.mask.append(mask0)
                                       
             new_cen_nei = aa + torch.sum(mask0 * bb_nei, 0, keepdims=True) #hadamard product of neighbors' features  and mask aggregator, then applying sum aggregator
             input_new.append(new_cen_nei)                                      
