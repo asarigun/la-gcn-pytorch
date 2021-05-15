@@ -26,6 +26,7 @@ parser.add_argument('--early_stopping',type=int, default=10, help='Tolerance for
 parser.add_argument('--max_degree', type=int, default=3, help='Maximum Chebyshev polynomial degree.')
 parser.add_argument('--start_test', type=int, default=80, help='define from which epoch test')
 parser.add_argument('--train_jump', type=int, default=0, help='define whether train jump, defaul train_jump=0')
+parser.add_argument('--dataset', type=str, default="cora", help='define your dataset eg. "cora" ')
 #parser.add_argument('--train_percentage', type=float, default=0.1 , help='define the percentage of training data.')
 #parser.add_argument('--attack_dimension', type=int, default=0, help='define how many dimension of the node feature to attack')
 
@@ -39,7 +40,7 @@ if args.cuda:
     torch.cuda.manual_seed(args.seed)
 
 # Load data
-add_all, adj, features, labels, idx_train, idx_val, idx_test = load_data()
+add_all, adj, features, labels, idx_train, idx_val, idx_test = load_data(args.dataset)
 
 # Model and optimizer
 model = GCN_MASK(add_all, nfeat=features.shape[1],
