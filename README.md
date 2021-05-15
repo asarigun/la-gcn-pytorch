@@ -61,15 +61,15 @@ You can specify a dataset as follows:
 
 * For Citeseer: 
 ```bash
-python train.py --dataset citeseer
+python train.py --dataset "citeseer"
 ```
 * For Cora: 
 ```bash
-python train.py --dataset cora
+python train.py --dataset "cora"
 ```
 * For Pubmed: 
 ```bash
-python train.py --dataset pubmed
+python train.py --dataset "pubmed"
 ``` 
 <!--
 (or by editing `train.py`) -->
