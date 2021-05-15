@@ -78,7 +78,7 @@ class gcnmask(Module):
             bb_nei_index2 = self.add_all[i]
             bb_nei_index2 = np.array([[i]*input.shape[1] for i in bb_nei_index2], dtype="int64")
             bb_nei_index2 = torch.tensor(bb_nei_index2)
-            bb_nei = torch.gather(input,0, torch.tensor(bb_nei_index2)) 
+            bb_nei = torch.gather(input,0, bb_nei_index2)
             cen_nei = torch.cat([aa_tile, bb_nei],1)
             mask0 = torch.mm(cen_nei, self.weights_mask0) 
             mask0 = self.Sig(mask0)
