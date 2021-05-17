@@ -8,6 +8,10 @@ import numpy as np
 import torch.nn as nn
 import torch.nn.functional as F
 
+##########################################################################
+# Graph Convolutional Layers Adapted From https://github.com/tkipf/pygcn #
+##########################################################################
+
 
 class GraphConvolution(Module):
 
@@ -41,6 +45,12 @@ class GraphConvolution(Module):
         return self.__class__.__name__ + ' (' \
                + str(self.in_features) + ' -> ' \
                + str(self.out_features) + ')'
+    
+##############################################################################################
+# Learnable Aggregator for Graph Convolutional Layers Adapted from                           #
+# TensorFlow Implementation from https://github.com/LiZhang-github/LA-GCN/tree/master/code   #
+# And https://github.com/asarigun/la-gcn-tensorflow                                          #
+##############################################################################################
     
 class gcnmask(Module):
 
