@@ -9,6 +9,11 @@ from scipy.sparse.linalg.eigen.arpack import eigsh
 import sys
 import pdb
 import torch
+
+##############################################
+# Modified from https://github.com/tkipf/gcn #
+##############################################
+
 """
 ind.dataset.x => the feature vectors of the training instances as scipy.sparse.csr.csr_matrix object;
 ind.dataset.tx => the feature vectors of the test instances as scipy.sparse.csr.csr_matrix object;
