@@ -88,25 +88,25 @@ class gcnmask(Module):
         for i in range(len(self.add_all)):
 
             index = torch.tensor([[i]*input.shape[1]])
-            aa = torch.gather(input, 0, torch.tensor([[i]*input.shape[1]])) 
-            aa_tile = torch.tile(aa, [len(self.add_all[i]), 1]) #expand central 
+            aa = torch.gather(input, 0, torch.tensor([[i]*input.shape[1]]).to(self.device)).to(self.device)
+            aa_tile = torch.tile(aa, [len(self.add_all[i]), 1]).to(self.device) #expand central 
             bb_nei_index2 = self.add_all[i]
             bb_nei_index2 = np.array([[i]*input.shape[1] for i in bb_nei_index2], dtype="int64")
-            bb_nei_index2 = torch.tensor(bb_nei_index2)
-            bb_nei = torch.gather(input,0, bb_nei_index2)
-            cen_nei = torch.cat([aa_tile, bb_nei],1)
-            mask0 = torch.mm(cen_nei, self.weights_mask0) 
+            bb_nei_index2 = torch.tensor(bb_nei_index2).to(self.device)
+            bb_nei = torch.gather(input,0, bb_nei_index2).to(self.device)
+            cen_nei = torch.cat([aa_tile, bb_nei],1).to(self.device)
+            mask0 = torch.mm(cen_nei, self.weights_mask0).to(self.device)
             mask0 = self.Sig(mask0)
             mask0 = F.dropout(mask0, self.drop_rate)
                                       
                                       
-            new_cen_nei = aa + torch.sum(mask0 * bb_nei, 0, keepdims=True) #hadamard product of neighbors' features  and mask aggregator, then applying sum aggregator
+            new_cen_nei = aa + torch.sum(mask0 * bb_nei, 0, keepdims=True).to(self.device) #hadamard product of neighbors' features  and mask aggregator, then applying sum aggregator
             input_new.append(new_cen_nei)                                      
             
-        input_new = torch.stack(input_new)                                     
-        input_new = torch.squeeze(input_new)
-        support = torch.mm(input_new, self.weight_0)
-        output = torch.spmm(adj, support)
+        input_new = torch.stack(input_new).to(self.device)                                     
+        input_new = torch.squeeze(input_new).to(self.device)
+        support = torch.mm(input_new, self.weight_0).to(self.device)
+        output = torch.spmm(adj, support).to(self.device)
         if self.bias is not None:
             return output + self.bias
         else:
