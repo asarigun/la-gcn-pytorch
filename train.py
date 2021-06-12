@@ -30,15 +30,22 @@ parser.add_argument('--dataset', type=str, default="cora", help='define your dat
 #parser.add_argument('--train_percentage', type=float, default=0.1 , help='define the percentage of training data.')
 #parser.add_argument('--attack_dimension', type=int, default=0, help='define how many dimension of the node feature to attack')
 
+if torch.cuda.is_available():
+  dev = "cuda:0"
+else:
+  dev = "cpu"
+
+device = torch.device(dev)
 
 args = parser.parse_args()
-args.cuda = not args.no_cuda and torch.cuda.is_available()
+#args.cuda = not args.no_cuda and torch.cuda.is_available()
 
 np.random.seed(args.seed)
 torch.manual_seed(args.seed)
+"""
 if args.cuda:
     torch.cuda.manual_seed(args.seed)
-
+"""
 # Load data
 add_all, adj, features, labels, idx_train, idx_val, idx_test = load_data(args.dataset)
 
@@ -46,12 +53,12 @@ add_all, adj, features, labels, idx_train, idx_val, idx_test = load_data(args.da
 model = GCN_MASK(add_all, nfeat=features.shape[1],
             nhid=args.hidden,
             nclass=labels.max().item() + 1,
-            dropout=args.dropout)
+            dropout=args.dropout, device = device)
 optimizer = optim.Adam(model.parameters(),
                        lr=args.lr, weight_decay=args.weight_decay)
 
 
-
+"""
 if args.cuda:
     model.cuda()
     features = features.cuda()
@@ -60,7 +67,15 @@ if args.cuda:
     idx_train = idx_train.cuda()
     idx_val = idx_val.cuda()
     idx_test = idx_test.cuda()
+"""
 
+model.to(device)
+features = features.to(device)
+adj = adj.to(device)
+labels = labels.to(device)
+idx_train = idx_train.to(device)
+idx_val = idx_val.to(device)
+idx_test = idx_test.to(device)
 
 def train(epoch):
     t = time.time()
