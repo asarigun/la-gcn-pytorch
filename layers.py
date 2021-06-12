@@ -16,15 +16,16 @@ import torch.nn.functional as F
 class GraphConvolution(Module):
 
 
-    def __init__(self, in_features, out_features, bias=True):
+    def __init__(self, in_features, out_features, weight, bias, device):
         super(GraphConvolution, self).__init__()
         self.in_features = in_features
         self.out_features = out_features
-        self.weight = Parameter(torch.FloatTensor(in_features, out_features))
-        if bias:
-            self.bias = Parameter(torch.FloatTensor(out_features))
-        else:
-            self.register_parameter('bias', None)
+
+        self.device = device
+
+        self.weight = weight                                                                                                    
+        self.bias = bias
+
         self.reset_parameters()
 
     def reset_parameters(self):
@@ -54,22 +55,26 @@ class GraphConvolution(Module):
     
 class gcnmask(Module):
 
-    def __init__(self, add_all, in_features, out_features, bias=False): 
+    def __init__(self, add_all, in_features, out_features, weight, bias, weights_mask0, device): 
         super(gcnmask, self).__init__()
-        self.in_features = in_features
-        self.Sig = nn.Sigmoid()
-        self.out_features = out_features
-        self.add_all = add_all
-        self.drop_rate = 0.5
-        self.weight_0 = Parameter(torch.FloatTensor(in_features, out_features))
 
-        if bias:
-            self.bias = Parameter(torch.FloatTensor(out_features))
-        else:
-            self.register_parameter('bias', None)
+        self.in_features = in_features
+        self.out_features = out_features
+
+        self.Sig = nn.Sigmoid()
+        self.add_all = add_all
+
+        self.drop_rate = 0.5
+        self.device = device
+
+        self.weight_0 = weight
+        self.weights_mask0 = weights_mask0
+
+        self.bias =  bias
+
         self.reset_parameters()
         
-        self.weights_mask0 = Parameter(torch.FloatTensor(2*in_features, in_features))
+        
 
     def reset_parameters(self):
         stdv = 1. / math.sqrt(self.weight_0.size(1))
