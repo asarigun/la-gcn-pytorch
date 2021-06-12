@@ -44,6 +44,7 @@ To cora example:
  These documents must be stored with the pickle module of python
 """
 
+
 def parse_index_file(filename):
     """Parse index file."""
     index = []
@@ -76,11 +77,15 @@ def load_data(dataset):
 
     test_idx_reorder = parse_index_file("data/ind.{}.test.index".format(dataset))
     test_idx_range = np.sort(test_idx_reorder)
-
+    
+    # print(test_idx_range)
+    # print("test_idx_reorder", len(test_idx_reorder))
+    
     if dataset == 'citeseer':
         # Fix citeseer dataset (there are some isolated nodes in the graph)
         # Find isolated nodes, add them as zero-vecs into the right position
-        test_idx_range_full = range(min(test_idx_reorder), max(test_idx_reorder)+1)
+        test_idx_range_full = list(range(min(test_idx_reorder), max(test_idx_reorder)+1))
+        #print(set(test_idx_range_full)-set(test_idx_range))
         tx_extended = sp.lil_matrix((len(test_idx_range_full), x.shape[1]))
         tx_extended[test_idx_range-min(test_idx_range), :] = tx
         tx = tx_extended
@@ -89,12 +94,16 @@ def load_data(dataset):
         ty = ty_extended
 
     features = sp.vstack((allx, tx)).tolil()
+    # print(allx.shape, tx.shape)
+    # print(features.shape)
 
     features[test_idx_reorder, :] = features[test_idx_range, :]
     adj = nx.adjacency_matrix(nx.from_dict_of_lists(graph))
 
     labels = np.vstack((ally, ty))
+    #print("labels", labels.shape)
     labels[test_idx_reorder, :] = labels[test_idx_range, :]
+    # print("labels", labels.shape)
 
     idx_test = test_idx_range.tolist()
         
@@ -121,7 +130,17 @@ def load_data(dataset):
         add_all.append(adj[i].nonzero()[1])
 
     features = torch.FloatTensor(np.array(features.todense()))
-    labels = torch.LongTensor(np.where(labels)[1])
+    # print(labels)
+    if dataset=="citeseer":
+    	new_labels = []
+    	for lbl in labels:
+    		lbl = np.where(lbl==1)[0]
+    		new_labels.append(lbl[0] if list(lbl)!=[] else 0)
+    	labels = torch.LongTensor(new_labels)
+    else:
+    	labels = torch.LongTensor(np.where(labels)[1])
+    
+    # print("labels", labels)
     adj = sparse_mx_to_torch_sparse_tensor(adj)
     idx_train = torch.LongTensor(idx_train)
     idx_val = torch.LongTensor(idx_val)
@@ -155,3 +174,4 @@ def sparse_mx_to_torch_sparse_tensor(sparse_mx):
     values = torch.from_numpy(sparse_mx.data)
     shape = torch.Size(sparse_mx.shape)
     return torch.sparse.FloatTensor(indices, values, shape)
+
