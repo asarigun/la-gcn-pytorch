@@ -82,7 +82,7 @@ python train.py --dataset "pubmed"
 
 ## Citation
 
-```
+```bibtex
 @inproceedings{zhang2020feature,
   title={A Feature-Importance-Aware and Robust Aggregator for GCN},
   author={Zhang, Li and Lu, Haiping},
@@ -91,7 +91,7 @@ python train.py --dataset "pubmed"
   year={2020}
 }
 ```
-```
+```bibtex
 @article{kipf2016semi,
   title={Semi-supervised classification with graph convolutional networks},
   author={Kipf, Thomas N and Welling, Max},
