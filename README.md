@@ -4,7 +4,7 @@
 <p align="center">
   <a href="https://dl.acm.org/doi/abs/10.1145/3340531.3411983"><img src="https://img.shields.io/badge/Paper-Report-red"/></a>
   <a href="https://grlearning.github.io/papers/134.pdf"><img src="https://img.shields.io/badge/Poster-NeurIPS2019-brown"/></a>
-  <a href="https://github.com/asarigun/LA-GCN"><img src="https://img.shields.io/badge/TensorFlow-Implementation-ff69b4"/></a>
+  <a href="https://github.com/asarigun/LA-GCN"><img src="https://img.shields.io/badge/TensorFlow-Implementation-FF6F00?style-for-the-badge&logo=TensorFlow"/></a>
   <a href="https://github.com/asarigun/la-gcn-torch/blob/main/LICENSE"><img src="https://img.shields.io/github/license/thudm/cogdl"/></a>
   <a href="https://colab.research.google.com/drive/1BurTEjf6sqtIfnVn9FdCGxBwiCCHiNAN?usp=sharing" alt="license"><img src="https://colab.research.google.com/assets/colab-badge.svg"/></a>
 </p>
